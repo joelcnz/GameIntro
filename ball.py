@@ -13,6 +13,7 @@ class Ball(pygame.sprite.Sprite):
 		self.pos = [10,10]
 		self.dir = [0,0]
 		self.bounce = False
+		self.hit = pygame.mixer.Sound('sfx\hit.wav')
 
 	def setBounce(self, bounce):
 		self.bounce = bounce
@@ -22,8 +23,10 @@ class Ball(pygame.sprite.Sprite):
 		self.pos[1] += self.speed[1]
 		if self.pos[0] < 0 or self.pos[0] + self.ballrect.width > self.width:
 			self.speed[0] = -self.speed[0]
+			self.hit.play()
 		if self.pos[1] < 0 or self.pos[1] + self.ballrect.height > self.height:
 			self.speed[1] = -self.speed[1]
+			self.hit.play()
 
 	def userControl(self):
 		self.pos[0] += self.dir[0]
